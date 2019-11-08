@@ -22,7 +22,7 @@ namespace HashGenerator
         private static byte[] ComposeIdentityV3Hash(byte[] salt, uint iterationCount, byte[] passwordHash)
         {
             var hash = new byte[1 + 4/*KeyDerivationPrf value*/ + 4/*Iteration count*/ + 4/*salt size*/ + salt.Length /*salt*/ + 32 /*password hash size*/];
-            hash[0] = 1; //Identity V3 marker
+            hash[0] = 1; // Identity V3 marker
 
             Buffer.BlockCopy(ConvertToNetworkOrder((uint)KeyDerivationPrf.HMACSHA256), 0, hash, 1, sizeof(uint));
             Buffer.BlockCopy(ConvertToNetworkOrder((uint)iterationCount), 0, hash, 1 + sizeof(uint), sizeof(uint));
@@ -70,8 +70,8 @@ namespace HashGenerator
             {
                 areEqual &= (array1[i] == array2[i]);
             }
-            //If you stop as soon as the arrays don't match you'll be disclosing information about how different they are by the time it takes to compare them
-            //this way no information is disclosed
+            // If you stop as soon as the arrays don't match you'll be disclosing information about how different they are by the time it takes to compare them
+            // this way no information is disclosed
             return areEqual;
         }
 

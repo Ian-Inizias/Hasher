@@ -12,7 +12,7 @@ namespace HashGenerator
             Console.WriteLine("Password: (If empty will generate a random one)");
             string password = Console.ReadLine();
 
-            if(string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(password))
             {
                 password = GeneratePassword(true, true, true, true, false, 8);
             }
@@ -20,18 +20,20 @@ namespace HashGenerator
             string hash = Hasher.GenerateIdentityV3Hash(password);
             Console.WriteLine("Generated hash: " + hash);
 
-            bool verificado = Hasher.VerifyIdentityV3Hash(password, hash);
-            if (!verificado)
+            bool verified = Hasher.VerifyIdentityV3Hash(password, hash);
+            if (!verified)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("ERROR");
+                Console.ResetColor();
+
                 Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Hash verified: " + verificado);
+                Console.WriteLine("Hash verified: " + verified);
 
-                var logPath = "Claves.txt";
+                var logPath = "Passwd.txt";
 
                 var logWriter = System.IO.File.AppendText(logPath);
                 logWriter.WriteLine(string.Format("Email: {0}   Password: {1}   Hash: {2}", email, password, hash));
