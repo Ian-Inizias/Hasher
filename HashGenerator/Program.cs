@@ -14,7 +14,7 @@ namespace HashGenerator
 
             if (string.IsNullOrEmpty(password))
             {
-                password = GeneratePassword(true, true, true, true, false, 8);
+                password = GeneratePassword(true, true, true, true, false, 12);
             }
 
             string hash = Hasher.GenerateIdentityV3Hash(password);
@@ -26,8 +26,6 @@ namespace HashGenerator
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("ERROR");
                 Console.ResetColor();
-
-                Console.ReadKey();
             }
             else
             {
@@ -39,6 +37,7 @@ namespace HashGenerator
                 logWriter.WriteLine(string.Format("Email: {0}   Password: {1}   Hash: {2}", email, password, hash));
                 logWriter.Dispose();
             }
+            Console.ReadKey();
         }
 
         private static string GeneratePassword(bool includeLowercase, bool includeUppercase, bool includeNumeric, bool includeSpecial, bool includeSpaces, int lengthOfPassword)
