@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HashGenerator
 {
@@ -6,6 +7,11 @@ namespace HashGenerator
     {
         static void Main(string[] args)
         {
+            // for (int i = 0; i < 10; i++)
+            // {
+            //     Console.WriteLine(GeneratePassword(true, true, true, true, false, 12));
+            // }
+
             Console.WriteLine("Account mail:");
             string email = Console.ReadLine();
 
