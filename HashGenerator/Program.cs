@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace HashGenerator
 {
@@ -13,20 +12,20 @@ namespace HashGenerator
             // }
 
             Console.WriteLine("Account mail:");
-            string email = Console.ReadLine();
+            var email = Console.ReadLine();
 
             Console.WriteLine("Password: (If empty will generate a random one)");
-            string password = Console.ReadLine();
+            var password = Console.ReadLine();
 
             if (string.IsNullOrEmpty(password))
             {
                 password = GeneratePassword(true, true, true, true, false, 12);
             }
 
-            string hash = Hasher.GenerateIdentityV3Hash(password);
+            var hash = Hasher.GenerateIdentityV3Hash(password);
             Console.WriteLine("Generated hash: " + hash);
 
-            bool verified = Hasher.VerifyIdentityV3Hash(password, hash);
+            var verified = Hasher.VerifyIdentityV3Hash(password, hash);
             if (!verified)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -37,10 +36,10 @@ namespace HashGenerator
             {
                 Console.WriteLine("Hash verified: " + verified);
 
-                var logPath = "Passwd.txt";
+                const string logPath = "Passwd.txt";
 
                 var logWriter = System.IO.File.AppendText(logPath);
-                logWriter.WriteLine(string.Format("Email: {0}   Password: {1}   Hash: {2}", email, password, hash));
+                logWriter.WriteLine($"Email: {email}   Password: {password}   Hash: {hash}");
                 logWriter.Dispose();
             }
             Console.ReadKey();
@@ -62,7 +61,7 @@ namespace HashGenerator
                 return "Password length must be between 8 and 128.";
             }
 
-            string characterSet = "";
+            var characterSet = "";
 
             if (includeLowercase)
             {
@@ -89,15 +88,15 @@ namespace HashGenerator
                 characterSet += SPACE_CHARACTER;
             }
 
-            char[] password = new char[lengthOfPassword];
-            int characterSetLength = characterSet.Length;
+            var password = new char[lengthOfPassword];
+            var characterSetLength = characterSet.Length;
 
-            Random random = new Random();
-            for (int characterPosition = 0; characterPosition < lengthOfPassword; characterPosition++)
+            var random = new Random();
+            for (var characterPosition = 0; characterPosition < lengthOfPassword; characterPosition++)
             {
                 password[characterPosition] = characterSet[random.Next(characterSetLength - 1)];
 
-                bool moreThanTwoIdenticalInARow =
+                var moreThanTwoIdenticalInARow =
                     characterPosition > MAXIMUM_IDENTICAL_CONSECUTIVE_CHARS
                     && password[characterPosition] == password[characterPosition - 1]
                     && password[characterPosition - 1] == password[characterPosition - 2];
