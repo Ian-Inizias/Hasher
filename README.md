@@ -1,3 +1,8 @@
+# DEPRECATED
+THIS REPOSITORY IS  NO LONGER SUPPORTED.
+
+Nowadays identity incorporates the option to do this functions by default.
+
 # Hasher
 Identity V3 Password Hash generator
 
